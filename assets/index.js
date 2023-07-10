@@ -51,7 +51,7 @@ function startQuiz() {
 // When a question is answered, present another question
 // function taken from youtube but minus the shuffled array
 var questionIndex = 0;
-function nextQuestion(question) {
+function nextQuestion() {
     if (questionIndex < quizQuestions.length) {
     var currentQuestion = quizQuestions[questionIndex];
     questionIndex++;
@@ -87,17 +87,17 @@ function selectedAnswer (e){
     const selectBtn = e.target
     const isCorrect = selectBtn.dataset.correctAnswer === "true";
     if (isCorrect) {
-        selectBtn.classList.add("Correct")
+        selectBtn.classList.add("correct");
         score++;
-        console.log("score is:" + score) // score added
     }else {
-        selectBtn.classList.add("Incorrect")
+        selectBtn.classList.add("incorrect");
         incorrectAnswer();
+        
     }
     // learned from https://www.youtube.com/watch?v=PBcqGxrr9g8 at 27:00
     Array.from(answerEl.children).forEach (button => {
         if (button.dataset.correct === "true") {
-            button.classList.add("Correct");
+            button.classList.add("correct");
             
         }
         button.disabled = true;
@@ -109,10 +109,18 @@ function selectedAnswer (e){
 function incorrectAnswer () {
     seconds -= 5;
 }
+
+// function for correct or wrong answer
+
 // All questions must be answered or timer reaches 0 = game is over
 
 // Game over? Save Initials and Score
+var highScoreInput = document.querySelector(".highscores");
 
+var highscores [];
+function renderHighScore () {
+    
+}
 //View highscores - button created in HTML
 
 //Creating array of questions

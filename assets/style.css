@@ -45,6 +45,14 @@ div#gameTimer {
    background-color: rgb(78, 78, 173);
    border-radius: 5px;
    box-shadow: 0 0 5px 2px;
+   position: relative;
+}
+.resultMessage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .btn {
@@ -68,19 +76,27 @@ div#gameTimer {
 .btn:disabled{
     cursor: no-drop;
 }    
+.highScores {
+   position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+}
 
-
-.btn-link {
+.highScores .btn-link {
     background: none;
     border: none;
     color: purple;
-    position:absolute;
-    top:0px;
-    left:0px;
+    margin: 0;
 }
-.Correct {
+.correct {
     background: green;
 }
-.Incorrect {
+.incorrect {
     background:red;
+}
+
+.resultMessage {
+    position: fixed;
 }

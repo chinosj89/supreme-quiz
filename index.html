@@ -8,8 +8,14 @@
 </head>
 <body>
     
-    <div class="highScores"></div>
+    <div class="highScores">
+        <h1>HIGH SCORES!!!!</h1>
+        <form id="player-form" method="POST">
+            <label for ="player-text"></label>
+        </form>
         <button type="button" class="btn btn-link">View HighScores</button>
+    </div>    
+
     <div id="gameTimer">Time: 0</div>
 
     <div class="quizBox hide">
@@ -21,13 +27,15 @@
                     <button class="btn">Answer #3</button>
                     <button class="btn">Answer #4</button>
                 </div>
-            <div class="resultMessage hide">Correct or Wrong?</div>
+            
         </div>
     </div>
+    <div class="resultMessage hide">Correct or Wrong?</div>
     <div id="startPage" class="startPage">
         Coding Quiz for Beginners!
         <button type="button" id="startBtn">START</button>
     </div>
+
 </body>
 <script src="assets/index.js"></script>
 </html>
