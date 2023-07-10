@@ -1,5 +1,6 @@
-* {
+*, *::before, *::after {
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 body {
@@ -7,6 +8,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
+    
 }
 
 #startBtn {
@@ -17,8 +20,8 @@ body {
    border-radius: 4px;
    background-color: blue;
    cursor: pointer;
-   font-size: 2em;
-   font:40px;
+   font-size: 2.5rem;
+   font-weight: bold;
    margin: auto;
 
 }
@@ -26,5 +29,48 @@ body {
     position:absolute;
     top:0px;
     right:0px;
+    
+}
+div#gameTimer {
+    font-size: 30px;
+    padding: 5px;
+}
 
+.hide {
+    display: none;
+}
+.quizBox {
+   width: 800px;
+   max-width: 80%;
+   background-color: rgb(78, 78, 173);
+   border-radius: 5px;
+   box-shadow: 0 0 5px 2px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-weight: 400;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+}
+.btn:hover {
+    background-color: grey;
+  }
+    
+
+
+.btn-link {
+    background: none;
+    border: none;
+    color: purple;
+    position:absolute;
+    top:0px;
+    left:0px;
 }
