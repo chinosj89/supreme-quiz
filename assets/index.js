@@ -16,7 +16,7 @@ var answerEl = document.getElementById ("userAnswer")
 var timerEl = document.getElementById("gameTimer")
 
 startBtn.addEventListener('click', function(){
-    var seconds = 60;
+    seconds = 60;
     countdown = setInterval(function () { // since countdown needs to be re-used when user makes incorrect, putting countdown as global var. removing var
         seconds--;
     if (seconds >= 0) {
@@ -28,7 +28,7 @@ startBtn.addEventListener('click', function(){
 
     
 }, 1000);
-})
+});
 
 //Timer runs well
 
@@ -37,13 +37,12 @@ startBtn.addEventListener('click', startQuiz)
 // Click start then present with a question
 
 
-
+//function to start quiz
 function startQuiz() {
     startBtn.classList.add('hide');
     startPage.style.display = 'none';
     quizBoxEl.classList.remove('hide');
     score = 0;
-    questionIndex = 0
     nextQuestion();
   }
   
@@ -52,33 +51,64 @@ function startQuiz() {
 // When a question is answered, present another question
 // function taken from youtube but minus the shuffled array
 var questionIndex = 0;
-function nextQuestion() {
-    currentQuestion = quizQuestions[questionIndex];
+function nextQuestion(question) {
+    if (questionIndex < quizQuestions.length) {
+    var currentQuestion = quizQuestions[questionIndex];
     questionIndex++;
     questionEl.innerText = currentQuestion.question;
+    replaceAnswers();
+    } else {
+        gameOver();
+    }
 
-
+//replaces child element of div userAnswer with the text from the array
     currentQuestion.answers.forEach (answer => { 
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
+        if (answer.correctAnswer) {
+            button.dataset.correctAnswer = answer.correctAnswer
+        }
         answerEl.appendChild(button);
-
+        button.addEventListener("click", selectedAnswer);
     });
 }  
 
-nextQuestion();
 
+//function to remove userAnswer div's child element
 function replaceAnswers () {
     while (answerEl.firstChild) {
         answerEl.removeChild(answerEl.firstChild);
     }
 }
 
-
+// function for user input; learned from https://www.youtube.com/watch?v=PBcqGxrr9g8
+function selectedAnswer (e){
+    const selectBtn = e.target
+    const isCorrect = selectBtn.dataset.correctAnswer === "true";
+    if (isCorrect) {
+        selectBtn.classList.add("Correct")
+        score++;
+        console.log("score is:" + score) // score added
+    }else {
+        selectBtn.classList.add("Incorrect")
+        incorrectAnswer();
+    }
+    // learned from https://www.youtube.com/watch?v=PBcqGxrr9g8 at 27:00
+    Array.from(answerEl.children).forEach (button => {
+        if (button.dataset.correct === "true") {
+            button.classList.add("Correct");
+            
+        }
+        button.disabled = true;
+    });
+    nextQuestion();
+}
 
 // incorrect answers must result in time penalty of 5 seconds
-
+function incorrectAnswer () {
+    seconds -= 5;
+}
 // All questions must be answered or timer reaches 0 = game is over
 
 // Game over? Save Initials and Score

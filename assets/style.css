@@ -60,10 +60,14 @@ div#gameTimer {
     transition: all 0.3s;
 
 }
-.btn:hover {
+/*https://www.youtube.com/watch?v=PBcqGxrr9g8*/
+
+.btn:hover:not([disabled]) {
     background-color: grey;
   }
-    
+.btn:disabled{
+    cursor: no-drop;
+}    
 
 
 .btn-link {
@@ -73,4 +77,10 @@ div#gameTimer {
     position:absolute;
     top:0px;
     left:0px;
+}
+.Correct {
+    background: green;
+}
+.Incorrect {
+    background:red;
 }
