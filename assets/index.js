@@ -11,6 +11,10 @@ var quizBoxEl = document.querySelector(".quizBox")
 var questionEl = document.getElementById ("question")
 var answerEl = document.getElementById ("userAnswer")
 
+//
+var correctNotification = document.getElementById('correct');
+var wrongNotification = document.getElementById('wrong');
+
 
 // Click start then Timer Begins
 var timerEl = document.getElementById("gameTimer")
@@ -57,6 +61,7 @@ function nextQuestion() {
     questionIndex++;
     questionEl.innerText = currentQuestion.question;
     replaceAnswers();
+
     } else {
         gameOver();
     }
@@ -83,15 +88,18 @@ function replaceAnswers () {
 }
 
 // function for user input; learned from https://www.youtube.com/watch?v=PBcqGxrr9g8
+
+
 function selectedAnswer (e){
+    resetNotifications();
     const selectBtn = e.target
     const isCorrect = selectBtn.dataset.correctAnswer === "true";
     if (isCorrect) {
-        selectBtn.classList.add("correct");
-        score++;
+        score++
+        correctNotification.style.display ='block';
     }else {
-        selectBtn.classList.add("incorrect");
         incorrectAnswer();
+        wrongNotification.style.display ='block';
         
     }
     // learned from https://www.youtube.com/watch?v=PBcqGxrr9g8 at 27:00
@@ -110,14 +118,17 @@ function incorrectAnswer () {
     seconds -= 5;
 }
 
+function resetNotifications() {
+    correctNotification.style.display = 'none';
+    wrongNotification.style.display = 'none';
+  }
 // function for correct or wrong answer
-
 // All questions must be answered or timer reaches 0 = game is over
 
 // Game over? Save Initials and Score
 var highScoreInput = document.querySelector(".highscores");
 
-var highscores [];
+var highscores ;
 function renderHighScore () {
     
 }
