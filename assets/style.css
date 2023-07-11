@@ -9,6 +9,7 @@ body {
     align-items: center;
     height: 100vh;
     width: 100vw;
+    background-color: #354c7c;
     
 }
 
@@ -18,12 +19,19 @@ body {
    color: white;
    text-shadow: 1px 1px 1px #000;
    border-radius: 4px;
-   background-color: blue;
+   background-color: #022954;
    cursor: pointer;
    font-size: 2.5rem;
    font-weight: bold;
    margin: auto;
 
+}
+#startPage {
+    text-align: center;
+    background-color: 	#b0b8ce;
+    border: 5px solid #022954;
+    border-radius: 10px;
+    padding: 5px;
 }
 #gameTimer {
     position:absolute;
@@ -46,6 +54,8 @@ div#gameTimer {
    border-radius: 5px;
    box-shadow: 0 0 5px 2px;
    position: relative;
+   font-size: 32px;
+   padding: 5px;
 }
 
 .btn {
@@ -59,6 +69,7 @@ div#gameTimer {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s;
+    font-size: 20px;
 
 }
 /*https://www.youtube.com/watch?v=PBcqGxrr9g8*/
@@ -80,7 +91,7 @@ div#gameTimer {
 .highScores .btn-link {
     background: none;
     border: none;
-    color: purple;
+    color: 	#eaebfe;
     margin: 0;
 }
 #highScoreh1 {

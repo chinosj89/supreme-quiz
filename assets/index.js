@@ -126,6 +126,7 @@ function resetNotifications() {
 // All questions must be answered or timer reaches 0 = game is over
 
 // Game over? Save Initials and Score
+//https://www.youtube.com/watch?v=DFhmNLKwwGw for highscores box
 var highScoreInput = document.querySelector(".highscores");
 
 var highscores ;
@@ -183,8 +184,51 @@ const quizQuestions = [
        {text:  '0 values', correctAnswer: false }
    ],
 },
-
-
+    {
+        question: "What is the result of the following expression: 2 + 2 * 3?",
+        answers: [
+            {text: "4", correctAnswer: false},
+            {text: "8", correctAnswer: true},
+            {text: "10", correctAnswer: false},
+            {text: "12", correctAnswer: false}
+        ]
+    },
+    {
+        question: "What is the CSS Property used to change the color of the text?",
+        answers: [
+            {text: "background-color", correctAnswer: false},
+            {text: "text-color", correctAnswer: false},
+            {text: "color", correctAnswer: true},
+            {text: "font-color", correctAnswer: false}
+        ]
+    },
+    {
+        question: "What is the for loop function for?",
+        answers: [
+            {text: "to define a function", correctAnswer: false},
+            {text: "to handle user input", correctAnswer: false},
+            {text: "to specify who the gift is for", correctAnswer: false},
+            {text: "to perform an action repeatedly", correctAnswer: true}
+        ]
+    },
+    {
+        question: "Why do you need to create a function ",
+        answers: [
+            {text: "to store data like 2+2", correctAnswer: false},
+            {text: "to style your webpage", correctAnswer: false},
+            {text: "to define a class or object", correctAnswer: false},
+            {text: "to perform a specific task or calculation", correctAnswer: true}
+        ]
+    },
+    {
+        question: "Last Question: Did you like the quiz? ",
+        answers: [
+            {text: "Yes", correctAnswer: true},
+            {text: "No", correctAnswer: true},
+            {text: "Maybe", correctAnswer: true},
+            {text: "No point in the quiz", correctAnswer: false}
+        ]
+    },
 ]
 
 
