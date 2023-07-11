@@ -75,7 +75,7 @@ div#gameTimer {
 /*https://www.youtube.com/watch?v=PBcqGxrr9g8*/
 
 .btn:hover:not([disabled]) {
-    background-color: grey;
+    background-color: #354c7c;
   }
 .btn:disabled{
     cursor: no-drop;

@@ -87,15 +87,15 @@ function replaceAnswers () {
     }
 }
 
+
 // function for user input; learned from https://www.youtube.com/watch?v=PBcqGxrr9g8
-
-
 function selectedAnswer (e){
     resetNotifications();
     const selectBtn = e.target
     const isCorrect = selectBtn.dataset.correctAnswer === "true";
     if (isCorrect) {
         score++
+        console.log("Current Score: " + score);
         correctNotification.style.display ='block';
     }else {
         incorrectAnswer();
@@ -118,12 +118,17 @@ function incorrectAnswer () {
     seconds -= 5;
 }
 
+//reset Correct or Wrong after selectedAnswer
 function resetNotifications() {
     correctNotification.style.display = 'none';
     wrongNotification.style.display = 'none';
   }
-// function for correct or wrong answer
+
 // All questions must be answered or timer reaches 0 = game is over
+function gameOver (){
+
+}
+
 
 // Game over? Save Initials and Score
 //https://www.youtube.com/watch?v=DFhmNLKwwGw for highscores box
@@ -134,6 +139,7 @@ function renderHighScore () {
     
 }
 //View highscores - button created in HTML
+
 
 //Creating array of questions
 
