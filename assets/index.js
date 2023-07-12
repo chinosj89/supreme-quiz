@@ -1,21 +1,24 @@
 //Acceptance Criteria
 // Referenced study material https://www.youtube.com/watch?v=riDzcEQbX6k
+
+
 //Click Start Button 
+startBtn = document.getElementById("startBtn");
+startPage = document.getElementById("startPage");
 
+var quizBoxEl = document.querySelector(".quizBox");
+var questionEl = document.getElementById ("question");
+var answerEl = document.getElementById ("userAnswer");
+var scoreBtnEl = document.querySelector(".highScoreBtn");
+var nameInput = document.querySelector('#userNameInput');
+var submitButton = document.querySelector('#submitBtn');
+var finalPage = document.getElementById('finalScorePage')
 
-startBtn = document.getElementById("startBtn")
-startPage = document.getElementById("startPage") 
-
-//querySelector worked but not getElementbyClass
-var quizBoxEl = document.querySelector(".quizBox")
-var questionEl = document.getElementById ("question")
-var answerEl = document.getElementById ("userAnswer")
-
-//
+// Notification for if answers are right or wrong
 var correctNotification = document.getElementById('correct');
 var wrongNotification = document.getElementById('wrong');
 
-
+let score = 0;
 // Click start then Timer Begins
 var timerEl = document.getElementById("gameTimer")
 
@@ -26,7 +29,7 @@ startBtn.addEventListener('click', function(){
     if (seconds >= 0) {
         timerEl.textContent = "Seconds remaining: " + seconds; 
         // console.log("seconds:" + seconds);  //keeping until gaveOver function is complete
-    } else if (seconds === 0) 
+    } else if (seconds === 0)     
         gameOver(); //game over - need to create function
     
 
@@ -34,7 +37,9 @@ startBtn.addEventListener('click', function(){
 }, 1000);
 });
 
-//Timer runs well
+function incorrectAnswer () {
+    seconds -= 5;
+}
 
 // addEventListener for the quiz
 startBtn.addEventListener('click', startQuiz)
@@ -46,7 +51,7 @@ function startQuiz() {
     startBtn.classList.add('hide');
     startPage.style.display = 'none';
     quizBoxEl.classList.remove('hide');
-    score = 0;
+    document.querySelector('.highScores').style.display = 'none';
     nextQuestion();
   }
   
@@ -61,9 +66,9 @@ function nextQuestion() {
     questionIndex++;
     questionEl.innerText = currentQuestion.question;
     replaceAnswers();
-
+    
     } else {
-        gameOver();
+        renderScore();
     }
 
 //replaces child element of div userAnswer with the text from the array
@@ -80,7 +85,7 @@ function nextQuestion() {
 }  
 
 
-//function to remove userAnswer div's child element
+//function to remove userAnswer div's child element also taken from youtube
 function replaceAnswers () {
     while (answerEl.firstChild) {
         answerEl.removeChild(answerEl.firstChild);
@@ -114,9 +119,6 @@ function selectedAnswer (e){
 }
 
 // incorrect answers must result in time penalty of 5 seconds
-function incorrectAnswer () {
-    seconds -= 5;
-}
 
 //reset Correct or Wrong after selectedAnswer
 function resetNotifications() {
@@ -124,22 +126,51 @@ function resetNotifications() {
     wrongNotification.style.display = 'none';
   }
 
-// All questions must be answered or timer reaches 0 = game is over
 function gameOver (){
-
+    // scoring(); will be added here 
 }
 
 
 // Game over? Save Initials and Score
-//https://www.youtube.com/watch?v=DFhmNLKwwGw for highscores box
-var highScoreInput = document.querySelector(".highscores");
 
-var highscores ;
-function renderHighScore () {
-    
+
+//Viewing highscores - button created in HTML
+scoreBtnEl.addEventListener('click', viewHighScore)
+
+function viewHighScore (){
+    startBtn.classList.add('hide');
+    startPage.style.display = 'none';
+    timerEl.classList.add('hide');
 }
-//View highscores - button created in HTML
 
+// Game ended; tallies score
+function renderScore () {
+    console.log("final score is " + score);
+    submitButton.classList.remove('hide');
+    nameInput.style.display = 'block';
+    quizBoxEl.classList.add('hide');
+    timerEl.classList.add('hide');
+    var finalScore = document.getElementById('finalScorePageMessage');
+    finalScore.textContent = score;
+    resetNotifications();
+}
+
+// to show score on page
+function showScore (){
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user!== null) {
+        console.log(user.userName);
+    }
+ }
+ submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    var user = {
+        userName: nameInput.value.trim()
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+    nameInput.value = "";
+    showScore();
+});
 
 //Creating array of questions
 
