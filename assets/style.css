@@ -94,6 +94,8 @@ div#gameTimer {
 .btn:disabled{
     cursor: no-drop;
 }    
+
+/* removing for now; not part of acceptance criteria
 .highScores {
     position: fixed;
     top: 0;
@@ -116,7 +118,7 @@ div#gameTimer {
     flex-direction: column;
 }
 
-
+*/
 .resultMessage {
     display: block;
     position: absolute;

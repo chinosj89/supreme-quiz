@@ -26,15 +26,20 @@ var timerEl = document.getElementById("gameTimer")
 
 
 // Buttons
+/*
 function playAgain(event) {
     event.preventDefault();
+    startPage.style.display = 'block';
+    finalPage.style.display = 'none'
+    resetState();
     startQuiz();
+    renderScore();
   }
   
 replayBtn.addEventListener('click', function(event) {
     playAgain(event);
 });
-  
+  */
 
 function clearScores(event) {
   event.preventDefault();
@@ -67,15 +72,20 @@ function incorrectAnswer () {
 startBtn.addEventListener('click', startQuiz)
 // Click start then present with a question
 
+//function to start quiz or play again
+function resetState () {
+    questionIndex = 0;
+    score = 0; 
+    resetNotifications();
+}
 
-//function to start quiz
 function startQuiz() {
     startBtn.classList.add('hide');
     startPage.style.display = 'none';
     quizBoxEl.classList.remove('hide');
-    document.querySelector('.highScores').style.display = 'none';
+    //document.querySelector('.highScores').style.display = 'none';
     nextQuestion();
-
+    
   }
   
 // When a question is answered, present another question
@@ -205,7 +215,17 @@ submitButton.addEventListener('click',function(event){
 init();
 
 
+// need to look into this more // not part of acceptance criteria; 
+/*
+scoreBtnEl.addEventListener('click', viewHighScore)
 
+function viewHighScore (){
+    startBtn.classList.add('hide');
+    startPage.style.display = 'none';
+    timerEl.classList.add('hide');
+    finalPage.classList.remove('hide');
+} 
+*/
 //Creating array of questions
 
 
