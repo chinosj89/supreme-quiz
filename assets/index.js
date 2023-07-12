@@ -132,6 +132,7 @@ function selectedAnswer (e){
         
     }
     nextQuestion();
+    init(userScore);
 }
 
 //reset Correct or Wrong after selectedAnswer; 
@@ -176,7 +177,7 @@ function init () {
     var storedScore = JSON.parse(localStorage.getItem("userScore"));
     if (storedInfo && storedScore!== null) {
         userInput = storedInfo;
-        userScore = storedScore;
+       var userScore = storedScore;
     }
     renderScoring();
 }    
