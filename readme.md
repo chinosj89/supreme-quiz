@@ -52,4 +52,4 @@ I realized that there were alot of things that I wanted to include but since I a
 
 
 ## DEPLOYED SITE
-
+https://chinosj89.github.io/supreme-quiz/
