@@ -144,3 +144,10 @@ div#gameTimer {
     background-color: 	#b0b8ce;
     padding: 5px;
 }
+
+#scoreList {
+    display: block;
+    background-color: #022954;
+    color: #b0b8ce;
+    list-style: none;
+}
