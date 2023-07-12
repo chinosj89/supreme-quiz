@@ -38,18 +38,8 @@ body {
     font-weight: bold;
     margin: auto;
 }
-#clearBtn {
-    display: none;
-    text-align: center;
-    color: white;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 4px;
-    background-color: #022954;
-    cursor: pointer;
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: auto;
-}
+
+
 #startPage {
     text-align: center;
     background-color: 	#b0b8ce;
@@ -144,14 +134,13 @@ div#gameTimer {
 }
 
 
-#finalScorePage {
-    display: flex;
+.scorePage{
+    text-align: left;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 800px;
-    height: 800px;
+    width: 500px;
     border: 1px solid black;
     border-radius: 4px;
     background-color: 	#b0b8ce;
+    padding: 5px;
 }

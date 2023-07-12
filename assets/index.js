@@ -12,7 +12,10 @@ var answerEl = document.getElementById ("userAnswer");
 var scoreBtnEl = document.querySelector(".highScoreBtn");
 var nameInput = document.querySelector('#userNameInput');
 var submitButton = document.querySelector('#submitBtn');
-var finalPage = document.getElementById('finalScorePage')
+var finalPage = document.getElementById('finalScorePage');
+var replayBtn = document.getElementById('replayBtn');
+var clearBtn = document.getElementById('clearBtn');
+
 
 // Notification for if answers are right or wrong
 var correctNotification = document.getElementById('correct');
@@ -22,6 +25,30 @@ let score = 0;
 // Click start then Timer Begins
 var timerEl = document.getElementById("gameTimer")
 
+
+// Buttons
+function playAgain(event) {
+    console.log('Play Again button clicked');
+    event.preventDefault();
+    startPage.style.display = 'block';
+    finalPage.style.display = 'none'
+    
+  }
+  
+replayBtn.addEventListener('click', function(event) {
+    playAgain(event);
+});
+  
+
+function clearButton(event) {
+    event.preventDefault();
+    list.innerHTML=" ";
+}
+clearBtn.addEventListener('click', function(event) {
+    clearButton(event);
+});
+
+
 startBtn.addEventListener('click', function(){
     seconds = 60;
     countdown = setInterval(function () { // since countdown needs to be re-used when user makes incorrect, putting countdown as global var. removing var
@@ -30,7 +57,7 @@ startBtn.addEventListener('click', function(){
         timerEl.textContent = "Seconds remaining: " + seconds; 
         // console.log("seconds:" + seconds);  //keeping until gaveOver function is complete
     } else if (seconds === 0)     
-        gameOver(); //game over - need to create function
+        renderScore(); //game over - need to create function
     
 
     
@@ -53,6 +80,7 @@ function startQuiz() {
     quizBoxEl.classList.remove('hide');
     document.querySelector('.highScores').style.display = 'none';
     nextQuestion();
+
   }
   
 
@@ -60,16 +88,17 @@ function startQuiz() {
 // When a question is answered, present another question
 // function taken from youtube but minus the shuffled array
 var questionIndex = 0;
+
 function nextQuestion() {
-    if (questionIndex < quizQuestions.length) {
+  if (questionIndex < quizQuestions.length) {
     var currentQuestion = quizQuestions[questionIndex];
     questionIndex++;
     questionEl.innerText = currentQuestion.question;
     replaceAnswers();
-    
-    } else {
-        renderScore();
-    }
+  } else {
+    renderScore();
+  }
+
 
 //replaces child element of div userAnswer with the text from the array
     currentQuestion.answers.forEach (answer => { 
@@ -81,9 +110,9 @@ function nextQuestion() {
         }
         answerEl.appendChild(button);
         button.addEventListener("click", selectedAnswer);
-    });
-}  
-
+    });  
+    
+}
 
 //function to remove userAnswer div's child element also taken from youtube
 function replaceAnswers () {
@@ -131,9 +160,6 @@ function gameOver (){
 }
 
 
-// Game over? Save Initials and Score
-
-
 //Viewing highscores - button created in HTML
 scoreBtnEl.addEventListener('click', viewHighScore)
 
@@ -141,36 +167,62 @@ function viewHighScore (){
     startBtn.classList.add('hide');
     startPage.style.display = 'none';
     timerEl.classList.add('hide');
+    finalPage.classList.remove('hide');
 }
 
 // Game ended; tallies score
 function renderScore () {
-    console.log("final score is " + score);
     submitButton.classList.remove('hide');
     nameInput.style.display = 'block';
     quizBoxEl.classList.add('hide');
     timerEl.classList.add('hide');
+    finalPage.classList.remove('hide');
+    // finalScore var for span on the page so final score is shown on the page
     var finalScore = document.getElementById('finalScorePageMessage');
     finalScore.textContent = score;
     resetNotifications();
 }
 
-// to show score on page
-function showScore (){
+//lesson 26
+var scoring = [];
+// to show score on page and 
+function userSubmit (){
     var user = JSON.parse(localStorage.getItem("user"));
     if (user!== null) {
-        console.log(user.userName);
+        var list = document.getElementById("highScoreList");
+        var createList = document.createElement("p") 
+        createList.textContent = user.userName + " = " + score;
+        list.appendChild(createList);
+
+    //to store data when page is refreshed or function playAgain runs     
+    storedScores();  
     }
  }
+ function init () {
+    var storedScores =JSON.parse(localStorage.getItem("scoring"));
+    if (storedScores!==null) {
+        scoring = storedScores
+    }
+    userSubmit();
+}
+
+function storedScores() {
+    localStorage.setItem("scoring", JSON.stringify(scoring));
+}
+
+ 
  submitButton.addEventListener('click', function(event) {
     event.preventDefault();
     var user = {
         userName: nameInput.value.trim()
     };
+    
     localStorage.setItem("user", JSON.stringify(user));
     nameInput.value = "";
-    showScore();
+    userSubmit();
+    
 });
+
 
 //Creating array of questions
 
