@@ -1,5 +1,5 @@
 //Acceptance Criteria
-// Referenced study material https://www.youtube.com/watch?v=riDzcEQbX6k
+// Referenced study materials https://www.youtube.com/watch?v=riDzcEQbX6k , https://www.youtube.com/watch?v=PBcqGxrr9g8
 
 
 //Click Start Button 
@@ -13,7 +13,7 @@ var scoreBtnEl = document.querySelector(".highScoreBtn");
 var nameInput = document.querySelector('#userNameInput');
 var submitButton = document.querySelector('#submitBtn');
 var finalPage = document.getElementById('finalScorePage');
-var replayBtn = document.getElementById('replayBtn');
+// var replayBtn = document.getElementById('replayBtn');
 var clearBtn = document.getElementById('clearBtn');
 
 // Notification for if answers are right or wrong
@@ -24,8 +24,6 @@ let score = 0;
 // Click start then Timer Begins
 var timerEl = document.getElementById("gameTimer")
 
-
-// Buttons
 /*
 function playAgain(event) {
     event.preventDefault();
@@ -41,6 +39,8 @@ replayBtn.addEventListener('click', function(event) {
 });
   */
 
+
+//Buttons
 function clearScores(event) {
   event.preventDefault();
   userInput = []; 
@@ -50,7 +50,7 @@ function clearScores(event) {
 
 clearBtn.addEventListener('click', clearScores);
 
-
+//Start Game: Runs timer and Runs quiz questions
 startBtn.addEventListener('click', function(){
     seconds = 60;
     countdown = setInterval(function() {
@@ -63,21 +63,13 @@ startBtn.addEventListener('click', function(){
     }, 1000);
   });
   
-
+// incorrect answer penalty
 function incorrectAnswer () {
     seconds -= 5;
 }
 
-// addEventListener for the quiz
-startBtn.addEventListener('click', startQuiz)
-// Click start then present with a question
 
-//function to start quiz or play again
-function resetState () {
-    questionIndex = 0;
-    score = 0; 
-    resetNotifications();
-}
+startBtn.addEventListener('click', startQuiz)
 
 function startQuiz() {
     startBtn.classList.add('hide');
@@ -130,7 +122,8 @@ function selectedAnswer (e){
     const selectBtn = e.target
     const isCorrect = selectBtn.dataset.correctAnswer === "true";
     if (isCorrect) {
-        score++
+        score++;
+        userScore = score;
         console.log("Current Score: " + score);
         correctNotification.style.display ='block';
     }else {
@@ -138,42 +131,32 @@ function selectedAnswer (e){
         wrongNotification.style.display ='block';
         
     }
-    // learned from https://www.youtube.com/watch?v=PBcqGxrr9g8 at 27:00
-    Array.from(answerEl.children).forEach (button => {
-        if (button.dataset.correct === "true") {
-            button.classList.add("correct");
-            
-        }
-        button.disabled = true;
-    });
     nextQuestion();
 }
 
-// incorrect answers must result in time penalty of 5 seconds
-
-//reset Correct or Wrong after selectedAnswer
+//reset Correct or Wrong after selectedAnswer; 
 function resetNotifications() {
     correctNotification.style.display = 'none';
     wrongNotification.style.display = 'none';
   }
 
 
-//Viewing highscores - button created in HTML
 
-// Game ended; tallies score
+// Game ended; tallies score and shows final page where user submits their name
 function renderScore () {
     submitButton.classList.remove('hide');
     nameInput.style.display = 'block';
     quizBoxEl.classList.add('hide');
     timerEl.classList.add('hide');
     finalPage.classList.remove('hide');
+
     // finalScore var for span on the page so final score is shown on the page
     var finalScore = document.getElementById('finalScorePageMessage');
     finalScore.textContent = score;
     resetNotifications();
 }
 
-//lesson 26 Stu-Local-Storage-Todos
+//lesson 26 Stu-Local-Storage-Todos // for storing data in the local storage 
 var scoreListEl = document.getElementById('scoreList');
 var userInput = [];
 function renderScoring () {
@@ -190,14 +173,17 @@ function renderScoring () {
 }
 function init () {
     var storedInfo = JSON.parse(localStorage.getItem("userInput"));
-    if (storedInfo!== null) {
+    var storedScore = JSON.parse(localStorage.getItem("userScore"));
+    if (storedInfo && storedScore!== null) {
         userInput = storedInfo;
+        userScore = storedScore;
     }
     renderScoring();
 }    
 
 function storeScores() {
     localStorage.setItem("userInput", JSON.stringify(userInput));
+    localStorage.setItem("userScore", JSON.stringify(userScore));
 }
 submitButton.addEventListener('click',function(event){
     event.preventDefault();
